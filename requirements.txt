@@ -20,6 +20,7 @@ idna==3.13
 ipython==8.12.3
 jedi==0.19.2
 Jinja2==3.1.6
+joblib==1.5.3
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 jupyter_client==8.8.0
@@ -31,6 +32,7 @@ mistune==3.2.0
 nbclient==0.10.4
 nbconvert==7.17.1
 nbformat==5.10.4
+nltk==3.9.4
 packaging==26.2
 pandocfilters==1.5.1
 parso==0.8.6
@@ -44,10 +46,12 @@ pure_eval==0.2.3
 pydantic==2.13.3
 pydantic_core==2.46.3
 Pygments==2.20.0
+PyMuPDF==1.27.2.3
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
 pyzmq==27.1.0
 referencing==0.37.0
+regex==2026.4.4
 requests==2.33.1
 rpds-py==0.30.0
 six==1.17.0
@@ -56,6 +60,7 @@ stack-data==0.6.3
 starlette==1.0.0
 tinycss2==1.4.0
 tornado==6.5.5
+tqdm==4.67.3
 traitlets==5.14.3
 typing-inspection==0.4.2
 typing_extensions==4.15.0

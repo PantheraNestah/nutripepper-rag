@@ -1,4 +1,4 @@
-from app.services.pipeline import run_basic_pipeline
+from app.services.pipeline import RAGPipeline
 
 def get_pipeline_service():
-    return run_basic_pipeline
+    return RAGPipeline()

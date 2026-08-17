@@ -5,5 +5,18 @@ __pycache__/
 venv/
 .idea/
 .vscode/
+logs/
+requirements_v1.txt
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+.idea/
+.vscode/
 chroma_storage/
 logs/
+# Database files
+*.db
+nutripepper_v1.db
+chromadb/

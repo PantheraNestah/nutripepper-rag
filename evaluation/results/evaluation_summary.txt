@@ -1,0 +1,57 @@
+=================================================================
+  NUTRIPEPPER RAG PIPELINE — EVALUATION REPORT
+  Generated: 2026-06-18 01:08:33
+=================================================================
+
+── RETRIEVAL QUALITY ────────────────────────────────────────
+  Queries evaluated : 30
+  Precision@1       : 0.6
+  Precision@3       : 0.7667  (target ≥ 0.85)
+  Precision@5       : 0.7667
+  Recall@3          : 0.7667
+  Recall@5          : 0.7667  (target ≥ 0.90)
+  MRR               : 0.6833  (target ≥ 0.80)
+
+── RETRIEVAL BY DOMAIN ──────────────────────────────────────
+  food_safety          n=15  MRR=0.8  Recall@3=0.8667
+  nutrition            n=15  MRR=0.5667  Recall@3=0.6667
+
+── RESPONSE GROUNDING ───────────────────────────────────────
+  Verified interactions : 64
+  Source attribution    : 0.75  (target ≥ 0.90)
+  Mean grounding score  : 0.7855
+  Contradiction rate    : 0.1094
+  Est. hallucination    : 0.2145  (target < 0.05)
+  Avg claims checked    : 8.09
+  Avg claims supported  : 5.83
+  Label distribution    : {'grounded': 42, 'partial': 17, 'ungrounded': 5}
+
+── SYSTEM PERFORMANCE ───────────────────────────────────────
+  [query]
+    Requests      : 66
+    Mean latency  : 12784.5 ms
+    Median latency: 5526.9 ms
+    P95 latency   : 35022.5 ms  (target < 5000ms)
+    Under 3s      : 19.7%  (target > 95%)
+  [learn]
+    Requests      : 7
+    Mean latency  : 19011.5 ms
+    Median latency: 10057.4 ms
+    P95 latency   : 47971.3 ms  (target < 5000ms)
+    Under 3s      : 0.0%  (target > 95%)
+
+── KENYA-SPECIFIC QUERY PERFORMANCE (Objective 4) ──────────
+  Queries evaluated     : 10
+  Domain relevance      : 1.0  (target ≥ 0.80)
+  Kenya content match   : 0.466
+  Avg source diversity  : 1.9
+
+── TARGETS vs ACTUALS ───────────────────────────────────────
+  Precision@3 ≥ 0.85                  actual=0.7667  ✗ NOT MET
+  Recall@5 ≥ 0.90                     actual=0.7667  ✗ NOT MET
+  MRR ≥ 0.80                          actual=0.6833  ✗ NOT MET
+  Source attribution ≥ 0.90           actual=0.7500  ✗ NOT MET
+  Hallucination < 0.05                actual=0.7855  ✗ NOT MET
+  Kenya relevance ≥ 0.80              actual=1.0000  ✓ MET
+
+=================================================================

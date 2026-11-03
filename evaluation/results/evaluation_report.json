@@ -1,0 +1,858 @@
+{
+  "generated_at": "2026-06-18 01:08:33",
+  "retriever_pipeline": "Hybrid (Semantic + BM25 RRF + Cross-encoder Reranking)",
+  "test_set_size": 40,
+  "retrieval": {
+    "aggregated": {
+      "num_queries": 30,
+      "MRR": 0.6833,
+      "Precision@1": 0.6,
+      "Recall@1": 0.6,
+      "Precision@3": 0.7667,
+      "Recall@3": 0.7667,
+      "Precision@5": 0.7667,
+      "Recall@5": 0.7667
+    },
+    "domain_breakdown": {
+      "food_safety": {
+        "count": 15,
+        "MRR": 0.8,
+        "Recall@3": 0.8667
+      },
+      "nutrition": {
+        "count": 15,
+        "MRR": 0.5667,
+        "Recall@3": 0.6667
+      }
+    },
+    "per_query": [
+      {
+        "query_id": "q_001",
+        "query": "How should I create a flow diagram for evaluating possible hazards in food manufacturing processes?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_69",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 0.5,
+        "found_at_rank": 2,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_70",
+          "fao_who_general_principles_food_hygiene_69",
+          "fao_who_general_principles_food_hygiene_46",
+          "fao_who_general_principles_food_hygiene_89",
+          "fao_who_general_principles_food_hygiene_71"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_002",
+        "query": "How can we ensure that the HACCP guidance we are using is appropriate for our specific operation or product?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_81",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_81",
+          "fao_who_general_principles_food_hygiene_66",
+          "fao_who_general_principles_food_hygiene_67",
+          "fao_who_general_principles_food_hygiene_62",
+          "fao_who_general_principles_food_hygiene_83"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_003",
+        "query": "What are the different types of root vegetables and bananas found in Kenya's food composition tables?",
+        "domain": "nutrition",
+        "gt_chunk_id": "KENYA-FOOD-COMPOSITION-TABLES-2018_67",
+        "gt_source": "KENYA-FOOD-COMPOSITION-TABLES-2018.pdf",
+        "rr": 0.0,
+        "found_at_rank": null,
+        "retrieved_ids": [
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_52",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_94",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_77",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_68",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_82"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "q_004",
+        "query": "What are the different types of fatty acids found in various foods in the Kenya Food Composition Tables?",
+        "domain": "nutrition",
+        "gt_chunk_id": "KENYA-FOOD-COMPOSITION-TABLES-2018_158",
+        "gt_source": "KENYA-FOOD-COMPOSITION-TABLES-2018.pdf",
+        "rr": 0.0,
+        "found_at_rank": null,
+        "retrieved_ids": [
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_163",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_161",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_159",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_154",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_21"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "q_005",
+        "query": "How can I reduce my salt intake in my daily meals?",
+        "domain": "nutrition",
+        "gt_chunk_id": "who_healthy_diet_fact_sheet_6",
+        "gt_source": "who_healthy_diet_fact_sheet.pdf",
+        "rr": 0.5,
+        "found_at_rank": 2,
+        "retrieved_ids": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_47",
+          "who_healthy_diet_fact_sheet_6",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_80",
+          "who_healthy_diet_fact_sheet_1",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_78"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_006",
+        "query": "Can handwashing basins be used for washing food or utensils?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_28",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_28",
+          "fao_who_general_principles_food_hygiene_27",
+          "fao_who_general_principles_food_hygiene_36",
+          "fao_who_general_principles_food_hygiene_35",
+          "fao_who_general_principles_food_hygiene_26"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_007",
+        "query": "How can we minimize the impact or likelihood of risks in our nutrition education program?",
+        "domain": "nutrition",
+        "gt_chunk_id": "Kenya-Nutrition-Action-Plan-2018-2022_206",
+        "gt_source": "Kenya-Nutrition-Action-Plan-2018-2022.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "Kenya-Nutrition-Action-Plan-2018-2022_206",
+          "Kenya-Nutrition-Action-Plan-2018-2022_202",
+          "Kenya-Nutrition-Action-Plan-2018-2022_132",
+          "Kenya-Nutrition-Action-Plan-2018-2022_15",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_122"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_008",
+        "query": "How can we strengthen the coordination and collaboration between national and county governments for nutrition governance?",
+        "domain": "nutrition",
+        "gt_chunk_id": "Kenya-Nutrition-Action-Plan-2018-2022_236",
+        "gt_source": "Kenya-Nutrition-Action-Plan-2018-2022.pdf",
+        "rr": 0.5,
+        "found_at_rank": 2,
+        "retrieved_ids": [
+          "Kenya-Nutrition-Action-Plan-2018-2022_147",
+          "Kenya-Nutrition-Action-Plan-2018-2022_236",
+          "Kenya-Nutrition-Action-Plan-2018-2022_14",
+          "Kenya-Nutrition-Action-Plan-2018-2022_266",
+          "Kenya-Nutrition-Action-Plan-2018-2022_11"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_009",
+        "query": "How will the national office stay updated on the needs and feedback from the counties regarding the implementation of the Guidelines?",
+        "domain": "nutrition",
+        "gt_chunk_id": "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_126",
+        "gt_source": "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_126",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_127",
+          "Kenya-Nutrition-Action-Plan-2018-2022_182",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_123",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_120"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_010",
+        "query": "Are there separate areas designated for cleaning tools and equipment from highly contaminated areas?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_27",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_27",
+          "fao_who_general_principles_food_hygiene_35",
+          "fao_who_general_principles_food_hygiene_29",
+          "fao_who_general_principles_food_hygiene_23",
+          "fao_who_general_principles_food_hygiene_51"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_011",
+        "query": "What are the elements of sector-wide partnership in the KNAP?",
+        "domain": "nutrition",
+        "gt_chunk_id": "Kenya-Nutrition-Action-Plan-2018-2022_2",
+        "gt_source": "Kenya-Nutrition-Action-Plan-2018-2022.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "Kenya-Nutrition-Action-Plan-2018-2022_2",
+          "Kenya-Nutrition-Action-Plan-2018-2022_27",
+          "Kenya-Nutrition-Action-Plan-2018-2022_197",
+          "Kenya-Nutrition-Action-Plan-2018-2022_146",
+          "Kenya-Nutrition-Action-Plan-2018-2022_190"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_012",
+        "query": "How can communities and parents be involved in school nutrition activities?",
+        "domain": "nutrition",
+        "gt_chunk_id": "Kenya-Nutrition-Action-Plan-2018-2022_15",
+        "gt_source": "Kenya-Nutrition-Action-Plan-2018-2022.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "Kenya-Nutrition-Action-Plan-2018-2022_15",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_124",
+          "Kenya-Nutrition-Action-Plan-2018-2022_213",
+          "Kenya-Nutrition-Action-Plan-2018-2022_91",
+          "Kenya-Nutrition-Action-Plan-2018-2022_90"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_013",
+        "query": "What is the purpose of food composition data in Kenya?",
+        "domain": "nutrition",
+        "gt_chunk_id": "KENYA-FOOD-COMPOSITION-TABLES-2018_10",
+        "gt_source": "KENYA-FOOD-COMPOSITION-TABLES-2018.pdf",
+        "rr": 0.0,
+        "found_at_rank": null,
+        "retrieved_ids": [
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_11",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_12",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_5",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_4",
+          "Kenya Nutrient Profile Model (KNPM) 2025_0_23"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "q_014",
+        "query": "How can management ensure the effectiveness of the food hygiene systems in place?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_13",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_13",
+          "fao_who_general_principles_food_hygiene_12",
+          "fao_who_general_principles_food_hygiene_33",
+          "fao_who_general_principles_food_hygiene_63",
+          "fao_who_general_principles_food_hygiene_34"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_015",
+        "query": "How many grams of protein are in chicken, unspecified part, without bone, meat, and skin, boiled without salt?",
+        "domain": "nutrition",
+        "gt_chunk_id": "KENYA-FOOD-COMPOSITION-TABLES-2018_109",
+        "gt_source": "KENYA-FOOD-COMPOSITION-TABLES-2018.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_109",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_113",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_186",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_110",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_111"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_016",
+        "query": "What is a contaminant in food safety terms?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_14",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_14",
+          "fao_who_general_principles_food_hygiene_21",
+          "fao_who_general_principles_food_hygiene_50",
+          "fao_who_general_principles_food_hygiene_20",
+          "fao_who_general_principles_food_hygiene_59"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_017",
+        "query": "What are the mineral contents of different fruits in the Kenya Food Composition Tables?",
+        "domain": "nutrition",
+        "gt_chunk_id": "KENYA-FOOD-COMPOSITION-TABLES-2018_96",
+        "gt_source": "KENYA-FOOD-COMPOSITION-TABLES-2018.pdf",
+        "rr": 0.0,
+        "found_at_rank": null,
+        "retrieved_ids": [
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_94",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_7",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_12",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_97",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018_95"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "q_018",
+        "query": "Why are obesity, diabetes, and cardiovascular diseases on the rise in Kenya?",
+        "domain": "nutrition",
+        "gt_chunk_id": "Kenya Nutrient Profile Model (KNPM) 2025_0_13",
+        "gt_source": "Kenya Nutrient Profile Model (KNPM) 2025_0.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "Kenya Nutrient Profile Model (KNPM) 2025_0_13",
+          "Kenya Nutrient Profile Model (KNPM) 2025_0_2",
+          "Kenya Nutrient Profile Model (KNPM) 2025_0_17",
+          "Kenya Nutrient Profile Model (KNPM) 2025_0_16",
+          "Kenya-Nutrition-Action-Plan-2018-2022_58"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_019",
+        "query": "How can I determine if a control measure is a critical control point (CCP) in the HACCP system?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_75",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_75",
+          "fao_who_general_principles_food_hygiene_90",
+          "fao_who_general_principles_food_hygiene_76",
+          "fao_who_general_principles_food_hygiene_64",
+          "fao_who_general_principles_food_hygiene_62"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_020",
+        "query": "Why is biochemical assessment considered a more objective approach than other methods of assessing nutritional status?",
+        "domain": "nutrition",
+        "gt_chunk_id": "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_86",
+        "gt_source": "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_86",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_87",
+          "Kenya Nutrient Profile Model (KNPM) 2025_0_19",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_90",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_22"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_021",
+        "query": "Is the packaging design and materials safe for food use and free from toxic contaminants?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_54",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_54",
+          "fao_who_general_principles_food_hygiene_52",
+          "fao_who_general_principles_food_hygiene_30",
+          "fao_who_general_principles_food_hygiene_29",
+          "fao_who_general_principles_food_hygiene_59"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_022",
+        "query": "Why is it important to ensure that the food we eat is safe?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_3",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 0.5,
+        "found_at_rank": 2,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_12",
+          "fao_who_general_principles_food_hygiene_3",
+          "fao_who_general_principles_food_hygiene_9",
+          "fao_who_general_principles_food_hygiene_4",
+          "fao_who_general_principles_food_hygiene_58"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_023",
+        "query": "How should cleaning and disinfection chemicals be stored to avoid contaminating food?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_35",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_35",
+          "fao_who_general_principles_food_hygiene_52",
+          "fao_who_general_principles_food_hygiene_30",
+          "fao_who_general_principles_food_hygiene_36",
+          "fao_who_general_principles_food_hygiene_34"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_024",
+        "query": "Why is it important to introduce complementary foods to infants at six months?",
+        "domain": "nutrition",
+        "gt_chunk_id": "Kenya-Nutrition-Action-Plan-2018-2022_61",
+        "gt_source": "Kenya-Nutrition-Action-Plan-2018-2022.pdf",
+        "rr": 0.5,
+        "found_at_rank": 2,
+        "retrieved_ids": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_59",
+          "Kenya-Nutrition-Action-Plan-2018-2022_61",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_55",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_61",
+          "who_healthy_diet_fact_sheet_4"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_025",
+        "query": "What are some of the practices and procedures that are considered as prerequisites for implementing a HACCP system?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_17",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 0.0,
+        "found_at_rank": null,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_63",
+          "fao_who_general_principles_food_hygiene_61",
+          "fao_who_general_principles_food_hygiene_81",
+          "fao_who_general_principles_food_hygiene_62",
+          "fao_who_general_principles_food_hygiene_67"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "q_026",
+        "query": "How important is training in maintaining food safety and suitability for consumption?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_31",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_31",
+          "fao_who_general_principles_food_hygiene_12",
+          "fao_who_general_principles_food_hygiene_33",
+          "fao_who_general_principles_food_hygiene_32",
+          "fao_who_general_principles_food_hygiene_85"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_027",
+        "query": "How are control measures established to ensure food safety during the production process?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_86",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_86",
+          "fao_who_general_principles_food_hygiene_81",
+          "fao_who_general_principles_food_hygiene_11",
+          "fao_who_general_principles_food_hygiene_74",
+          "fao_who_general_principles_food_hygiene_20"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_028",
+        "query": "How can I ensure that the food I am handling is safe to eat?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_11",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 0.0,
+        "found_at_rank": null,
+        "retrieved_ids": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_100",
+          "fao_who_general_principles_food_hygiene_44",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_101",
+          "fao_who_general_principles_food_hygiene_9",
+          "fao_who_general_principles_food_hygiene_12"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0
+      },
+      {
+        "query_id": "q_029",
+        "query": "What are the general principles that food businesses should follow to ensure food safety and suitability?",
+        "domain": "food_safety",
+        "gt_chunk_id": "fao_who_general_principles_food_hygiene_4",
+        "gt_source": "fao_who_general_principles_food_hygiene.pdf",
+        "rr": 1.0,
+        "found_at_rank": 1,
+        "retrieved_ids": [
+          "fao_who_general_principles_food_hygiene_4",
+          "fao_who_general_principles_food_hygiene_10",
+          "fao_who_general_principles_food_hygiene_13",
+          "fao_who_general_principles_food_hygiene_12",
+          "fao_who_general_principles_food_hygiene_60"
+        ],
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "precision@3": 1.0,
+        "recall@3": 1.0,
+        "precision@5": 1.0,
+        "recall@5": 1.0
+      },
+      {
+        "query_id": "q_030",
+        "query": "How can meat be cooked to retain the most nutrients?",
+        "domain": "nutrition",
+        "gt_chunk_id": "KENYA-FOOD-COMPOSITION-TABLES-2018_51",
+        "gt_source": "KENYA-FOOD-COMPOSITION-TABLES-2018.pdf",
+        "rr": 0.0,
+        "found_at_rank": null,
+        "retrieved_ids": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_98",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_94",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_97",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_40",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017_38"
+        ],
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0
+      }
+    ]
+  },
+  "grounding": {
+    "total_verified_interactions": 64,
+    "source_attribution_rate": 0.75,
+    "grounding_score": {
+      "mean": 0.7855,
+      "min": 8.0851,
+      "max": 5.8298
+    },
+    "grounding_label_distribution": {
+      "grounded": 42,
+      "partial": 17,
+      "ungrounded": 5
+    },
+    "contradiction_rate": 0.1094,
+    "avg_claims_checked": 8.09,
+    "avg_claims_supported": 5.83,
+    "estimated_hallucination_rate": 0.2145
+  },
+  "system_performance": {
+    "query": {
+      "count": 66,
+      "mean_ms": 12784.5,
+      "median_ms": 5526.9,
+      "p95_ms": 35022.5,
+      "min_ms": 1149.3,
+      "max_ms": 276051.3,
+      "under_3s_pct": 19.7
+    },
+    "learn": {
+      "count": 7,
+      "mean_ms": 19011.5,
+      "median_ms": 10057.4,
+      "p95_ms": 47971.3,
+      "min_ms": 4578.7,
+      "max_ms": 47971.3,
+      "under_3s_pct": 0.0
+    }
+  },
+  "kenyan_queries": {
+    "aggregated": {
+      "num_queries": 10,
+      "avg_domain_relevance": 1.0,
+      "avg_kenya_relevance": 0.466,
+      "avg_source_diversity": 1.9
+    },
+    "per_query": [
+      {
+        "query_id": "q_manual_001",
+        "query": "Is ugali a healthy meal for a growing child?",
+        "domain": "nutrition",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 0.33,
+        "source_diversity": 2,
+        "retrieved_sources": [
+          "unknown",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf"
+        ]
+      },
+      {
+        "query_id": "q_manual_002",
+        "query": "How can I make sukuma wiki more nutritious for my family?",
+        "domain": "nutrition",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 0.33,
+        "source_diversity": 2,
+        "retrieved_sources": [
+          "unknown",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf"
+        ]
+      },
+      {
+        "query_id": "q_manual_003",
+        "query": "What is the best local food to eat when a child has anaemia?",
+        "domain": "nutrition",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 0.0,
+        "source_diversity": 1,
+        "retrieved_sources": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf"
+        ]
+      },
+      {
+        "query_id": "q_manual_004",
+        "query": "How long can I safely store cooked githeri before it goes bad?",
+        "domain": "food_safety",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 0.33,
+        "source_diversity": 2,
+        "retrieved_sources": [
+          "unknown",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf"
+        ]
+      },
+      {
+        "query_id": "q_manual_005",
+        "query": "Is omena safe to eat every day for protein?",
+        "domain": "nutrition",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 0.33,
+        "source_diversity": 2,
+        "retrieved_sources": [
+          "unknown",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf"
+        ]
+      },
+      {
+        "query_id": "q_manual_006",
+        "query": "What foods should a pregnant woman in Kenya eat for a healthy baby?",
+        "domain": "nutrition",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 0.67,
+        "source_diversity": 1,
+        "retrieved_sources": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf"
+        ]
+      },
+      {
+        "query_id": "q_manual_007",
+        "query": "How do I know if maize flour has gone bad before cooking ugali?",
+        "domain": "food_safety",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 1.0,
+        "source_diversity": 2,
+        "retrieved_sources": [
+          "unknown",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018.pdf"
+        ]
+      },
+      {
+        "query_id": "q_manual_008",
+        "query": "What vegetables can I grow at home in Kenya to improve my family's diet?",
+        "domain": "nutrition",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 0.67,
+        "source_diversity": 3,
+        "retrieved_sources": [
+          "unknown",
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf",
+          "KENYA-FOOD-COMPOSITION-TABLES-2018.pdf"
+        ]
+      },
+      {
+        "query_id": "q_manual_009",
+        "query": "Why do children in Kenya often lack enough vitamins even when they eat regularly?",
+        "domain": "nutrition",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 1.0,
+        "source_diversity": 2,
+        "retrieved_sources": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf",
+          "Kenya-Nutrition-Action-Plan-2018-2022.pdf"
+        ]
+      },
+      {
+        "query_id": "q_manual_010",
+        "query": "Is it safe to reheat nyama choma that was left out overnight?",
+        "domain": "food_safety",
+        "domain_relevance": 1.0,
+        "kenya_relevance": 0.0,
+        "source_diversity": 2,
+        "retrieved_sources": [
+          "National-Guidelines-for-Healthy-Diets-and-Physical-Activity-2017.pdf",
+          "fao_who_general_principles_food_hygiene.pdf"
+        ]
+      }
+    ]
+  }
+}

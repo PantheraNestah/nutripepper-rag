@@ -6,7 +6,7 @@ Generates a structured test query dataset for RAG pipeline evaluation.
 
 Strategy:
 - Samples chunks directly from ChromaDB across domains and authorities
-- Uses GPT to generate natural questions from each chunk (ground truth guaranteed)
+- Uses an LLM (EASY tier, see app/services/llm.py) to generate natural questions from each chunk (ground truth guaranteed)
 - Appends 10 manually defined Kenya-specific queries
 - Saves the full test set to evaluation/test_set.json
 
@@ -23,7 +23,6 @@ import json
 import random
 import logging
 from pathlib import Path
-from openai import OpenAI
 from dotenv import load_dotenv
 import chromadb
 
@@ -45,7 +44,9 @@ OUTPUT_FILE   = OUTPUT_DIR / "test_set.json"
 
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-client_openai = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Model access goes through the shared provider layer (see app/services/llm.py).
+sys.path.insert(0, str(PROJECT_ROOT))
+from app.services.llm import Tier, complete  # noqa: E402
 
 
 # ── ChromaDB access ───────────────────────────────────────────────────────────
@@ -162,17 +163,17 @@ Chunk:
 
 
 def generate_query_for_chunk(chunk: dict) -> str | None:
-    """Generate a natural question from a chunk using GPT-3.5-turbo."""
+    """Generate a natural question from a chunk using the EASY-tier model."""
     prompt = QUERY_GEN_PROMPT.format(chunk_text=chunk["text"][:800])
 
     try:
-        response = client_openai.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.7,   # Some variety in phrasing
-            max_tokens=80,
-        )
-        query = response.choices[0].message.content.strip().strip('"')
+        query = complete(
+            Tier.EASY,
+            system="You write short, natural questions for a nutrition education quiz.",
+            user=prompt,
+            max_tokens=500,      # headroom for reasoning tokens; the question itself is ~30
+            temperature=0.7,     # some variety in phrasing (ignored by Anthropic models)
+        ).strip('"')
         return query if len(query) > 10 else None
 
     except Exception as e:

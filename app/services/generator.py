@@ -2,15 +2,19 @@
 
 import json
 import logging
-from openai import OpenAI
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
+from app.services.llm import Tier, complete, parse_json_object
 
 logger = logging.getLogger(__name__)
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Which model handles each task is decided by the tier -> model mapping in
+# app/services/llm.py (LLM_MODEL_COMPLEX / _MEDIUM / _EASY env vars).
+#
+# max_tokens includes reasoning tokens (adaptive thinking on Anthropic, thinking on
+# DeepSeek), so these are higher than the visible output alone would need.
+QUERY_MAX_TOKENS             = 2000    # ~600 tokens of answer
+STRUCTURED_LESSON_MAX_TOKENS = 6000    # ~1500 tokens of JSON beats
+TEXT_LESSON_MAX_TOKENS       = 10000   # ~3000 words of lesson + JSON overhead
 
 
 # ── Shared context builder ────────────────────────────────────────────────────
@@ -69,18 +73,17 @@ def generate_response(query: str, context: list) -> str:
 
     logger.info(f"[Generator] Sending query to LLM: '{query}'")
 
+    # Greetings / small talk (no retrieved context) are easy; grounded answers are medium.
+    tier = Tier.MEDIUM if context else Tier.EASY
+
     try:
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": QUERY_SYSTEM_PROMPT},
-                {"role": "user",   "content": user_prompt},
-            ],
+        generated_text = complete(
+            tier,
+            system=QUERY_SYSTEM_PROMPT,
+            user=user_prompt,
+            max_tokens=QUERY_MAX_TOKENS,
             temperature=0.2,
-            max_tokens=600,
-            top_p=0.9,
         )
-        generated_text = response.choices[0].message.content.strip()
         logger.info(f"[Generator] Query response generated ({len(generated_text)} chars)")
         return generated_text
 
@@ -177,20 +180,15 @@ def generate_lesson(concept: str, context: list) -> dict:
     logger.info(f"[Generator] Generating structured lesson for: '{concept}'")
 
     try:
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": STRUCTURED_LESSON_SYSTEM_PROMPT},
-                {"role": "user",   "content": user_prompt},
-            ],
+        raw = complete(
+            Tier.MEDIUM,
+            system=STRUCTURED_LESSON_SYSTEM_PROMPT,
+            user=user_prompt,
+            max_tokens=STRUCTURED_LESSON_MAX_TOKENS,
             temperature=0.3,
-            max_tokens=1500,
-            top_p=0.9,
-            response_format={"type": "json_object"},
+            json_mode=True,
         )
-
-        raw         = response.choices[0].message.content.strip()
-        lesson_data = json.loads(raw)
+        lesson_data = parse_json_object(raw)
 
         if "beats" in lesson_data:
             lesson_data["beats"] = _sanitize_beats(lesson_data["beats"])
@@ -313,20 +311,16 @@ def generate_text_lesson(concept: str, context: list, description: str | None = 
     )
 
     try:
-        response = client.chat.completions.create(
-            model="gpt-4-turbo",  # GPT-4-turbo for long-form coherent output (~20 min lesson)
-            messages=[
-                {"role": "system", "content": TEXT_LESSON_SYSTEM_PROMPT},
-                {"role": "user",   "content": user_prompt},
-            ],
-            temperature=0.4,      # Narrative writing benefits from slightly more fluency
-            max_tokens=4000,      # ~3000 words of lesson + JSON overhead
-            top_p=0.9,
-            response_format={"type": "json_object"},
+        # COMPLEX tier: long-form, coherent ~20 minute lesson.
+        raw = complete(
+            Tier.COMPLEX,
+            system=TEXT_LESSON_SYSTEM_PROMPT,
+            user=user_prompt,
+            max_tokens=TEXT_LESSON_MAX_TOKENS,
+            temperature=0.4,      # narrative fluency; ignored by Anthropic models
+            json_mode=True,
         )
-
-        raw         = response.choices[0].message.content.strip()
-        lesson_data = json.loads(raw)
+        lesson_data = parse_json_object(raw)
 
         if "sources" not in lesson_data:
             lesson_data["sources"] = list({item.get("source", "Unknown") for item in context})

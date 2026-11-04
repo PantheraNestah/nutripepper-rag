@@ -23,8 +23,10 @@ an earlier skeleton/dummy-pipeline phase.
 - **API**: FastAPI with `POST /query`, `POST /learn/structured`, `POST /learn/text`.
 - **Retrieval**: 3-stage hybrid — dense (MPNet/ChromaDB) + BM25, fused via Reciprocal
   Rank Fusion, then cross-encoder reranking.
-- **Generation**: OpenAI Chat Completions (`gpt-3.5-turbo` for queries/structured
-  lessons, `gpt-4-turbo` for long-form lessons), strictly grounded in retrieved context.
+- **Generation**: provider-agnostic LLM layer (`app/services/llm.py`). Tasks request a
+  tier (complex / medium / easy), each mapped to a model via env vars. Defaults:
+  Claude Sonnet 5.5 for long-form lessons, Claude Haiku 5.5 for queries and structured
+  lessons; DeepSeek and OpenAI are supported alternatives. Strictly grounded in retrieved context.
 - **Verification**: NLI-based claim grounding (runs async after the response is sent).
 - **Persistence**: async SQLAlchemy over SQLite, every interaction logged with provenance.
 - **Evaluation**: reproducible test-set generation + retrieval/grounding/latency metrics.
@@ -34,7 +36,7 @@ an earlier skeleton/dummy-pipeline phase.
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-# add OPENAI_API_KEY to .env
+cp .env.example .env   # then add ANTHROPIC_API_KEY (and/or DEEPSEEK_API_KEY)
 ./run.sh   # http://localhost:8000/docs
 ```
 

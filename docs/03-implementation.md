@@ -15,14 +15,13 @@ database schema/migrations, and known issues. Pairs with `01-system-design.md`
 | Lexical search | `rank_bm25` (BM25Okapi) |
 | Reranker | `cross-encoder/ms-marco-MiniLM-L-6-v2` |
 | NLI verifier | `cross-encoder/nli-MiniLM2-L6-H768` |
-| LLM | OpenAI Chat Completions (`gpt-3.5-turbo`, `gpt-4-turbo`) |
+| LLM | `app/services/llm.py` provider layer: Anthropic (default: `claude-sonnet-5-5`, `claude-haiku-5-5`), DeepSeek, OpenAI |
 | ORM / DB | SQLAlchemy 2.0 async + `aiosqlite` (SQLite) |
 | Migrations | Alembic |
 | PDF / NLP | PyMuPDF (`fitz`), NLTK |
 | Config | `python-dotenv` |
 
-> `requirements.txt` also pins `google-generativeai`, but the runtime generator uses
-> OpenAI. Gemini is not wired in.
+> `requirements.txt` also pins `google-generativeai`, but Gemini is not wired in.
 
 ## 2. Project Layout
 
@@ -150,14 +149,15 @@ just strips + lowercases. `CONVERSATIONAL_TRIGGERS` is a set of greeting/meta ph
 
 ## 7. Generation (`app/services/generator.py`)
 
-- `OpenAI(api_key=os.getenv("OPENAI_API_KEY"))` client at module load.
+- Model access goes through `app.services.llm.complete(tier, system=…, user=…, max_tokens=…)`;
+  clients are created lazily per provider. `parse_json_object()` tolerates code fences.
 - `_build_context_block()` numbers sources `[i] Source: … | Authority: …` so the LLM
   can cite inline.
-- `generate_response()` → query answers (gpt-3.5, temp 0.2, max 600).
-- `generate_lesson()` → structured beats (gpt-3.5, JSON mode, temp 0.3, max 1500);
+- `generate_response()` → query answers (MEDIUM tier; EASY when there is no retrieved context; max 2000).
+- `generate_lesson()` → structured beats (MEDIUM tier, JSON, max 6000);
   `_sanitize_beats()` backfills any missing tablet object; sources defaulted from
   context. `_fallback_structured_lesson()` on error.
-- `generate_text_lesson()` → narrative (gpt-4-turbo, JSON mode, temp 0.4, max 4000);
+- `generate_text_lesson()` → narrative (COMPLEX tier, JSON, max 10000);
   `_fallback_text_lesson()` on error.
 
 System prompts encode Pepper's persona (JKUAT Social Robotics Lab), strict grounding,
@@ -241,7 +241,8 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 # 2. Secrets (.env)
-#    OPENAI_API_KEY=sk-...
+#    ANTHROPIC_API_KEY=…   (and/or DEEPSEEK_API_KEY, OPENAI_API_KEY)
+#    see .env.example for LLM_MODEL_COMPLEX / _MEDIUM / _EASY
 #    APP_NAME=NutriPepper Backend
 #    APP_VERSION=1.0.0
 #    DEBUG=True

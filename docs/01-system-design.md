@@ -162,15 +162,23 @@ handed to the generator (internal scores are dropped).
 
 ## 6. Generation Design
 
-`generator.py` uses the **OpenAI** Chat Completions API (despite legacy docs naming
-Gemini). Three prompt programs share a context-block builder that numbers sources
-`[1], [2], …` so the model can cite inline.
+`generator.py` calls models through `app/services/llm.py`, a thin provider layer
+(Anthropic, DeepSeek, OpenAI). Each task asks for a **tier**; the tier→model mapping is
+configured with `LLM_MODEL_COMPLEX|MEDIUM|EASY=provider:model[:effort]`. Three prompt
+programs share a context-block builder that numbers sources `[1], [2], …` so the model
+can cite inline.
 
-| Endpoint | Model | Temp | Max tokens | Format |
+| Task | Tier | Default model | Max tokens* | Format |
 |---|---|---|---|---|
-| `/query` | `gpt-3.5-turbo` | 0.2 | 600 | free text w/ inline citations |
-| `/learn/structured` | `gpt-3.5-turbo` | 0.3 | 1500 | JSON object (beats) |
-| `/learn/text` | `gpt-4-turbo` | 0.4 | 4000 | JSON object (lesson + hints) |
+| `/query` (grounded) | medium | `claude-haiku-5-5`, effort medium | 2000 | free text w/ inline citations |
+| `/query` (small talk, no context) | easy | `claude-haiku-5-5`, effort medium | 2000 | free text |
+| `/learn/structured` | medium | `claude-haiku-5-5`, effort medium | 6000 | JSON object (beats) |
+| `/learn/text` | complex | `claude-sonnet-5-5`, effort medium | 10000 | JSON object (lesson + hints) |
+
+\*Includes reasoning tokens. Anthropic's current models accept no `temperature`/`top_p`;
+the generator's temperatures apply only to OpenAI-format providers (DeepSeek with effort
+`off`, OpenAI). Evaluation results in this documentation were produced with the earlier
+OpenAI models (gpt-3.5-turbo / gpt-4-turbo) and have not been re-run on the new defaults.
 
 All system prompts enforce: answer only from VERIFIED CONTEXT, never fabricate
 values, no medical advice, prefer Kenyan food examples, and (for lessons) emit

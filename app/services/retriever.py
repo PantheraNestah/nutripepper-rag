@@ -91,6 +91,17 @@ def _get_bm25() -> tuple[BM25Okapi, list[dict]]:
     return _bm25, _bm25_chunks
 
 
+def preload() -> None:
+    """
+    Load the vector store, BM25 index, embedding model and reranker now (and run one tiny
+    inference through each) so the first user request does not pay the load cost.
+    """
+    _get_collection()
+    _get_bm25()
+    _get_embedding_model().encode("warm up")
+    _get_reranker().predict([("warm up", "warm up")])
+
+
 # ── Stage 1: Semantic search (ChromaDB dense retrieval) ───────────────────────
 
 def _semantic_search(query: str, top_k: int) -> list[dict]:

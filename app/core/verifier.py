@@ -28,6 +28,11 @@ def _get_nli_model() -> CrossEncoder:
     return _nli_model
 
 
+def preload() -> None:
+    """Load the NLI model now (and run one tiny inference) instead of on first verification."""
+    _get_nli_model().predict([("warm up", "warm up")])
+
+
 # ── Data classes ──────────────────────────────────────────────────────────────
 
 @dataclass

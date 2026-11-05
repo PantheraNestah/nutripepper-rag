@@ -2,11 +2,10 @@
 
 **Project:** NutriPepper — Interactive Educator for Food Safety, Nutrition, and Sustainable Food Practices  
 **Component:** Retrieval-Augmented Generation (RAG) Pipeline  
-**Author:** James Moseti Moturi (SCT211-0095/2022)  
-**Supervisor:** Dr. Eunice Mwangi  
-**Course:** ICS 2406: Computer Systems Project — BSc Computer Science (Year 4\)  
-**Institution:** Jomo Kenyatta University of Agriculture and Technology (JKUAT)  
+**Type:** Final-year computer science project report  
 **Date:** June 2026
+
+> **Historical document.** The figures below were produced before the backend moved to Anthropic and DeepSeek models. The generator model was not recorded in the result files; this report attributes the runs to GPT-3.5-turbo and GPT-4-turbo. Retrieval metrics depend only on the retriever, the knowledge base and the test set. Grounding, attribution and latency figures depend on the generator and the host, are not comparable to the current default setup, and have not been re-run. For current documentation see the [project wiki](https://github.com/PantheraNestah/nutripepper-rag/wiki) and [Evaluation](https://github.com/PantheraNestah/nutripepper-rag/wiki/Evaluation).
 
 ---
 

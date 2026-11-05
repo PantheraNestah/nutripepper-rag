@@ -1,5 +1,6 @@
 # app/services/pipeline.py
 
+import asyncio
 import logging
 from app.services.retriever import retrieve
 from app.services.generator import generate_response, generate_lesson, generate_text_lesson
@@ -19,6 +20,17 @@ def is_conversational(query: str) -> bool:
     return any(trigger in q for trigger in CONVERSATIONAL_TRIGGERS)
 
 
+# LLM calls (10-40 s of network I/O) and retrieval (embedding, reranking: CPU-bound) run in
+# worker threads so the event loop keeps serving requests and finishing database writes.
+# Retrieval is one-at-a-time because it lazily initialises shared models and the BM25 index.
+_retrieve_lock = asyncio.Lock()
+
+
+async def _retrieve(query: str, **kwargs) -> list:
+    async with _retrieve_lock:
+        return await asyncio.to_thread(retrieve, query, **kwargs)
+
+
 class RAGPipeline:
 
     # ── /query ────────────────────────────────────────────────────────────────
@@ -29,7 +41,7 @@ class RAGPipeline:
 
         if is_conversational(processed_query):
             logger.info("[Pipeline] Conversational — skipping retrieval")
-            response        = generate_response(processed_query, context=[])
+            response        = await asyncio.to_thread(generate_response, processed_query, [])
             instrumentation = instrument_response(response)
             return {
                 "original_query":    query,
@@ -40,8 +52,8 @@ class RAGPipeline:
                 "citation_count":    instrumentation.citation_count,
             }
 
-        context  = retrieve(processed_query)
-        response = generate_response(processed_query, context)
+        context  = await _retrieve(processed_query)
+        response = await asyncio.to_thread(generate_response, processed_query, context)
 
         # Phase 1 — citation instrumentation only (fast, no NLI model)
         instrumentation = instrument_response(response)
@@ -63,8 +75,8 @@ class RAGPipeline:
         processed_concept = preprocess(concept)
         logger.info(f"[Pipeline] Structured lesson: '{processed_concept}'")
 
-        context     = retrieve(processed_concept, top_k=6)
-        lesson_data = generate_lesson(processed_concept, context)
+        context     = await _retrieve(processed_concept, top_k=6)
+        lesson_data = await asyncio.to_thread(generate_lesson, processed_concept, context)
         lesson_data["retrieved_context"] = context
         return lesson_data
 
@@ -74,7 +86,7 @@ class RAGPipeline:
         processed_concept = preprocess(concept)
         logger.info(f"[Pipeline] Text lesson: '{processed_concept}'")
 
-        context     = retrieve(processed_concept, top_k=10)
-        lesson_data = generate_text_lesson(processed_concept, context, description)
+        context     = await _retrieve(processed_concept, top_k=10)
+        lesson_data = await asyncio.to_thread(generate_text_lesson, processed_concept, context, description)
         lesson_data["retrieved_context"] = context
         return lesson_data

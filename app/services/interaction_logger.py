@@ -1,5 +1,6 @@
 # app/services/interaction_logger.py
 
+import asyncio
 import json
 import logging
 from datetime import datetime, timezone
@@ -12,6 +13,10 @@ from app.database.models import (
 from app.core.verifier import verify_response
 
 logger = logging.getLogger(__name__)
+
+# NLI verification is CPU-heavy (seconds to tens of seconds). It runs in a worker thread so it
+# cannot freeze the event loop, and one at a time because the NLI model loads lazily.
+_verify_lock = asyncio.Lock()
 
 
 async def log_query_interaction(
@@ -39,7 +44,8 @@ async def log_query_interaction(
     claims_supported   = None
 
     try:
-        report = verify_response(generated_response, retrieved_context)
+        async with _verify_lock:
+            report = await asyncio.to_thread(verify_response, generated_response, retrieved_context)
         grounding_score   = report.grounding_score
         grounding_label   = report.grounding_label
         has_contradiction = report.has_contradiction

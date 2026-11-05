@@ -18,5 +18,8 @@ chroma_storage/
 logs/
 # Database files
 *.db
+*.db-wal
+*.db-shm
+*.db-journal
 nutripepper_v1.db
 chromadb/

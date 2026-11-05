@@ -1,5 +1,10 @@
 # NutriPepper RAG Backend
 
+<p align="center">
+  <img src="docs/images/nutripepper-cover.webp" alt="The Pepper humanoid robot, the platform NutriPepper is built for" width="420"><br>
+  <sub>Photo by <a href="https://unsplash.com/@agk42?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alex Knight</a> on <a href="https://unsplash.com/photos/white-robot-near-brown-wall-2EJCSULRwC8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></sub>
+</p>
+
 Grounded nutrition question answering and lesson generation for the **Pepper** nutrition-education robot, built on Kenyan and WHO/FAO guidance documents.
 
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue) ![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688) ![Status](https://img.shields.io/badge/status-alpha%20(v0.1.0)-orange)
